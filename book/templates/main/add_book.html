@@ -1,0 +1,16 @@
+{% extends 'main/home.html' %}
+
+{% block title %} Kitob qo'shish {% endblock %}
+
+{% block content %}
+
+    <form class="mx-20 my-20 bg-gray-200 py-3 px-3 rounded-md row g-3 " action="." method="post"  enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form }}
+        <br>
+        <button type="submit" class="btn btn-primary">Qo'shish</button>
+
+    </form>
+
+{% endblock %}

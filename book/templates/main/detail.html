@@ -1,0 +1,30 @@
+{% extends "main/home.html" %}
+
+{% block title %} Kitob tafsiloti {% endblock %}
+
+{% block content %}
+    <div class="container my-10 mx-10">
+        <div class="row">
+            <div class="col-6">
+                <img src="{{ book.image.url }}" alt="">
+            </div>
+            <div class="col-6 rounded-md bg-gray-200 p-5">
+                <span class="font-bold">Kitobni nomi: </span>{{ book.title }} <br>
+                <span class="font-bold">Kitobni muallifi: </span>{{ book.author.name }} <br>
+                <span class="font-bold">Kitobni narxi: </span>{{ book.price }} <br>
+                <span class="font-bold">Kitob haqida: </span>{{ book.description }} <br> <br>
+                <form action="/detail/{{ book.id }}" method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mt-3">
+                        <label for="validationCustom03" class="form-label">Nechta kitob olmoqchisiz?</label>
+                        <input type="number" class="form-control" name="quantity" id="validationCustom03" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary mt-5">Sotib olish</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "main/home.html" %}
+
+{% block title %} Sotib olinganlar {% endblock %}
+
+{% block content %}
+
+    <div class="my-5 text-4xl font-bold h-100 flex justify-center">
+        Sotib olingan kitoblar
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 m-1">
+        {% for purchase in purchases %}
+            <div class="bg-gray-200 p-2 rounded-md flex flex-col justify-around">
+                <div class="flex justify-center">
+                    <img class="rounded-md" src="{{ purchase.book.image.url }}" width="100" alt="">
+                </div>
+                <div class="">
+                    <div class="">
+                        <span class="font-bold">Kitob nomi: </span> {{ purchase.book.title }}
+                    </div>
+                    <div class="">
+                        <span class="font-bold">Muallif nomi: </span> {{ purchase.book.author.name }}
+                    </div>
+                    <div class="">
+                        <span class="font-bold">Kitoblar soni: </span> {{ purchase.quantity }}
+                    </div>
+                    <div class="">
+                        <span class="font-bold">Xaridor nomi: </span> {{ purchase.customer.username }}
+                    </div>
+                </div> 
+            </div>
+        {% endfor %}
+    </div>
+    <form action="." method="post">
+        {% csrf_token %}
+
+        <div class="flex justify-end m-2">
+            {% if purchases.count != 0 %}
+                <button class="btn btn-danger bg-red-500" type="submit">O'chirish</button>
+            {% endif %}
+        </div>
+    </form>
+    {% if purchases.count == 0 %}
+        <div class="h-screen"></div>
+    {% else %}
+        <div class="h-20"></div>
+    {% endif %}
+{% endblock %}

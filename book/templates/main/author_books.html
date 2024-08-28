@@ -1,0 +1,77 @@
+{% extends 'main/home.html' %}
+
+{% block title %} Kitoblar {% endblock %}
+
+{% block content %}
+        <div class="container my-10">
+            <div class="row">
+            <div class="col-3 bg-gray-200 rounded-md py-3">
+                <div class="font-bold flex justify-center">
+                Mualliflar
+                </div>
+                <br>
+                <div class="flex justify-center">
+                <div>
+                    <ul>
+                    <li>
+                        <a href="{% url 'home' %}">Hammasi</a>
+                    </li>
+                        {% for author in authors %}
+                            <li>
+                                <a href="{% url 'authorBooks' author.id %}">{{ author.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                </div>
+                <br>
+                <div class="font-bold flex justify-center">
+                <a class="btn btn-success" href="{% url 'addAuthor' %}">Muallif qo'shish</a>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="container">
+                    <div class="row row-cols-3">
+                    {% for book in books1 %}
+                            <div class="col py-2 px-2">
+                                    <img class="object-fill rounded-md mb-2" height="200" width="200" src="{{ book.image.url }}" alt="">
+                                    <span class="font-bold">Nomi: </span>{{ book.title }}
+                                    <br>
+                                    <span class="font-bold">Muallif: </span>{{ book.author.name }}   
+                                    <br>
+                                    <a class="btn btn-primary mt-2" href="{% url 'detail' book.id %}">Ko'rish</a>
+                            </div>
+                    {% endfor %} 
+                    </div>
+                </div>
+                {% if books1.has_other_pages %}
+                    <div class="flex justify-center">
+                        <ul class="pagination">
+                            {% if books1.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ books1.previous_page_number }}">
+                                        &laquo;
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+                            {% endif %}
+                            {% for i in books1.paginator.page_range %}
+                                {% if books1.number == i %}
+                                    <li class="active page-item"><span class="page-link">{{ i }}<span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if books1.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ books1.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        </div>
+{% endblock %}

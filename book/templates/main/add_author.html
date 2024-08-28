@@ -1,0 +1,20 @@
+{% extends 'main/home.html' %}
+
+{% block title %} Kitob qo'shish {% endblock %}
+
+{% block content %}
+        <form class="mx-20 my-20" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <br>
+            <!-- <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="text" value="" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1">Example textarea</label>
+                <textarea class="form-control" name="bio" id="exampleFormControlTextarea1" rows="5"></textarea>
+            </div> -->
+            <button type="submit" class="btn btn-primary">Qo'shish</button>
+        </form>
+{% endblock %}
